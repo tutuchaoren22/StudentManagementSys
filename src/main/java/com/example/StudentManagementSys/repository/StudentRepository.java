@@ -5,6 +5,7 @@ import com.example.StudentManagementSys.entities.Student;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class StudentRepository {
     private List<Student> allStudents = new ArrayList<>();
@@ -23,9 +24,8 @@ public class StudentRepository {
     @Override
     public String toString() {
         StringBuilder allStudentsString = new StringBuilder();
-        Iterator list = allStudents.listIterator();
-        while (list.hasNext()) {
-            allStudentsString.append(list.next()).append("\n");
+        for (Student allStudent : allStudents) {
+            allStudentsString.append(allStudent).append("\n");
         }
         return allStudentsString.toString();
     }
@@ -41,24 +41,22 @@ public class StudentRepository {
     }
 
     public Student getStudentByName(String name) {
-        for (Student allStudent : allStudents) {
-            if (allStudent.getName().equals(name)) {
-                return allStudent;
+        for (Student student : allStudents) {
+            if (student.getName().equals(name)) {
+                return student;
             }
         }
         return new Student();
     }
 
     public boolean deleteStudentByName(String name) {
-        Iterator list = allStudents.listIterator();
-        while (list.hasNext()) {
-            if (list.next().equals(name)) {
-                list.remove();
-                return true;
-            } else {
-                return false;
+        Student deleteStudent = new Student();
+        for (Student student : allStudents) {
+            if (student.getName().equals(name)) {
+                deleteStudent = student;
+                break;
             }
         }
-        return false;
+        return allStudents.remove(deleteStudent);
     }
 }
