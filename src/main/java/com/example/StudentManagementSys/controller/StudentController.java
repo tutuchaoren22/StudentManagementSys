@@ -16,7 +16,6 @@ public class StudentController {
         add(new Student("小六", "女", "1-6"));
     }});
 
-    //    添加学生功能
     @PostMapping("/addStudentsByName")
     public String addStudentsByName(@RequestBody Student student) {
         if (studentRepository.addStudent(student)) {
@@ -26,13 +25,11 @@ public class StudentController {
         }
     }
 
-    //    查询所有学生的功能
     @GetMapping("/getAllStudents")
     public String getAllStudents() {
         return studentRepository.toString();
     }
 
-    //    根据学生姓名查询学生信息
     @PostMapping("/getStudentsByName")
     public String getStudentsByName(@RequestBody String name) {
         Student student = studentRepository.getStudentByName(name);
@@ -43,7 +40,6 @@ public class StudentController {
         }
     }
 
-    //    根据学生姓名删除学生
     @PostMapping("/deleteStudentsByName")
     public String deleteStudentsByName(@RequestBody String name) {
         if (studentRepository.deleteStudentByName(name)) {
